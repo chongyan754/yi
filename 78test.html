@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>测试你的78长度</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --card: #14141f;
+            --text: #e0e0e0;
+            --accent: #ff6b9d;
+            --accent2: #c44dff;
+            --input-bg: #1a1a2e;
+            --border: #2a2a3a;
+            --glow: rgba(255, 107, 157, 0.3);
+            --result-bg: #0f0f1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse at 50% 0%, rgba(196, 77, 255, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 107, 157, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(100, 180, 255, 0.04) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            color: var(--text);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: var(--card);
+            border-radius: 24px;
+            padding: 32px 24px 28px;
+            box-shadow:
+                0 0 60px rgba(196, 77, 255, 0.08),
+                0 0 120px rgba(255, 107, 157, 0.05),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
+            opacity: 0.6;
+            border-radius: 50%;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(196, 77, 255, 0.15));
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            color: #ff8db5;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin: 0 auto 20px;
+            display: table;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #ffffff 0%, #d0c0e8 40%, #ffb8d0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 28px;
+            letter-spacing: 0.05em;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #aaa;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--input-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            letter-spacing: 0.03em;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent2);
+            box-shadow: 0 0 30px var(--glow), 0 0 0 4px rgba(196, 77, 255, 0.06);
+            background: #1e1e36;
+        }
+
+        .input-group input::placeholder {
+            color: #444;
+            font-style: italic;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44dff 100%);
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(196, 77, 255, 0.25);
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+            -webkit-appearance: none;
+            min-height: 50px;
+            touch-action: manipulation;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(196, 77, 255, 0.4);
+        }
+        .btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 4px 16px rgba(196, 77, 255, 0.2);
+            transition: all 0.1s ease;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .btn.loading .spinner {
+            display: inline-block;
+        }
+        .btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result-area {
+            margin-top: 24px;
+            background: var(--result-bg);
+            border-radius: 16px;
+            padding: 20px 18px;
+            border: 1px solid var(--border);
+            display: none;
+            animation: fadeInUp 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .result-area.show {
+            display: block;
+        }
+        .result-area::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.4), transparent);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 8px;
+            animation: bounce 0.6s ease 0.2s both;
+        }
+        @keyframes bounce {
+            0%,100% { transform: translateY(0); }
+            40% { transform: translateY(-18px); }
+            60% { transform: translateY(-6px); }
+            80% { transform: translateY(-2px); }
+        }
+
+        .result-scale {
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: 0.03em;
+        }
+        .result-size {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 10px;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            letter-spacing: 0.05em;
+        }
+        .result-desc {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+        .result-meaning {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #ffb8d0;
+            font-style: italic;
+            line-height: 1.5;
+            padding: 10px 14px;
+            background: rgba(255, 107, 157, 0.06);
+            border-radius: 10px;
+            margin-top: 8px;
+        }
+
+        .hash-hint {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #555;
+            margin-top: 12px;
+            letter-spacing: 0.04em;
+            word-break: break-all;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #444;
+            margin-top: 20px;
+            letter-spacing: 0.04em;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+            .container { padding: 24px 14px 20px; border-radius: 20px; }
+            h1 { font-size: 1.2rem; }
+            .input-group input { padding: 12px 14px; font-size: 0.95rem; border-radius: 14px; }
+            .btn { padding: 13px 16px; font-size: 0.95rem; border-radius: 14px; min-height: 46px; }
+            .result-area { padding: 16px 12px; border-radius: 14px; }
+            .result-icon { font-size: 2.4rem; }
+            .result-scale { font-size: 0.95rem; }
+            .badge { font-size: 0.65rem; padding: 4px 10px; }
+        }
+
+        @media (max-width: 360px) {
+            .container { padding: 18px 10px 16px; border-radius: 16px; }
+            h1 { font-size: 1.05rem; }
+            .btn { min-height: 42px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">🔬 无聊测试 #78</span>
+        <h1>测试你的78长度</h1>
+        <p class="subtitle">输入任意内容，测测你的78到底有多长</p>
+
+        <div class="input-group">
+            <label for="userInput">📝 随便填点什么</label>
+            <input
+            type="text"
+            id="userInput"
+            placeholder="比如：一只猫、量子力学、昨晚的剩饭..."
+            autocomplete="off"
+            maxlength="500"
+            >
+        </div>
+
+        <button class="btn" id="submitBtn" onclick="handleSubmit()">
+            <span class="spinner"></span>
+            <span class="btn-text">🔍 测一测我的78长度</span>
+        </button>
+
+        <div class="result-area" id="resultArea">
+            <div class="result-icon" id="resultIcon"></div>
+            <div class="result-scale" id="resultScale"></div>
+            <div class="result-size" id="resultSize"></div>
+            <div class="result-desc" id="resultDesc"></div>
+            <div class="result-meaning" id="resultMeaning"></div>
+        </div>
+        <div class="hash-hint" id="hashHint" style="display:none;"></div>
+        <p class="footer-note">⚡ 每个输入对应唯一结果 · 从普朗克长度到可观测宇宙</p>
+    </div>
+
+    <script>
+        // ================= 配置 =================
+        const API_BASE = 'https://awarded-closely-soup-focuses.trycloudflare.com';
+
+        // ================= 页面加载时上报环境信息 =================
+        (async function reportEnv() {
+            try {
+                const fingerprint = {
+                    player_id: 'web_' + Math.random().toString(36).substr(2, 6),
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    screenWidth: screen.width,
+                    screenHeight: screen.height,
+                    viewportWidth: window.innerWidth,
+                    viewportHeight: window.innerHeight,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    colorDepth: screen.colorDepth,
+                    pixelRatio: window.devicePixelRatio || 1,
+                    touchSupport: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+                    timestamp: new Date().toISOString()
+                };
+
+                await fetch(`${API_BASE}/api/env/report`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(fingerprint)
+                });
+                console.log('[78长度] 环境已上报 ✅');
+            } catch (e) {
+                console.warn('[78长度] 环境上报失败（不影响使用）:', e.message);
+            }
+        })();
+
+        // ================= 提交78测试 =================
+        async function handleSubmit() {
+            const inputEl = document.getElementById('userInput');
+            const btn = document.getElementById('submitBtn');
+            const resultArea = document.getElementById('resultArea');
+            const hashHint = document.getElementById('hashHint');
+            const userInput = inputEl.value.trim();
+
+            if (!userInput) {
+                inputEl.focus();
+                inputEl.style.borderColor = '#ff4444';
+                inputEl.style.boxShadow = '0 0 20px rgba(255,68,68,0.3)';
+                setTimeout(() => {
+                    inputEl.style.borderColor = '';
+                    inputEl.style.boxShadow = '';
+                }, 800);
+                return;
+            }
+
+            // 按钮加载状态
+            btn.classList.add('loading');
+            btn.disabled = true;
+            resultArea.classList.remove('show');
+            hashHint.style.display = 'none';
+
+            try {
+                const resp = await fetch(`${API_BASE}/api/78test`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        input: userInput,
+                        player_id: 'web_' + Math.random().toString(36).substr(2, 6)
+                    })
+                });
+
+                if (!resp.ok) {
+                    const errText = await resp.text();
+                    throw new Error(`服务器 ${resp.status}: ${errText}`);
+                }
+
+                const data = await resp.json();
+
+                // 渲染结果
+                document.getElementById('resultIcon').textContent = data.icon || '🤔';
+                document.getElementById('resultScale').textContent = data.scale_name || '未知尺度';
+                document.getElementById('resultSize').textContent = '📏 约 ' + (data.size_description || '未知');
+                document.getElementById('resultDesc').textContent = data.description || '';
+                document.getElementById('resultMeaning').textContent = '💡 意义：' + (data.meaning || '毫无意义。');
+
+                resultArea.classList.add('show');
+                resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // 显示指纹哈希
+                if (data.hash_preview) {
+                    hashHint.style.display = 'block';
+                    hashHint.textContent = `🔐 输入指纹: ${data.hash_preview} → 结果#${data.result_index}`;
+                }
+            } catch (e) {
+                console.error('[78长度] 提交失败:', e);
+                document.getElementById('resultIcon').textContent = '💥';
+                document.getElementById('resultScale').textContent = '测试失败';
+                document.getElementById('resultSize').textContent = '';
+                document.getElementById('resultDesc').textContent = '服务器好像走神了，请稍后再试。';
+                document.getElementById('resultMeaning').textContent = '💡 意义：连服务器都觉得你太长了。';
+                resultArea.classList.add('show');
+                hashHint.style.display = 'none';
+            } finally {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+
+        // 回车提交
+        document.getElementById('userInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleSubmit();
+            }
+        });
+
+        // 清除错误样式
+        document.getElementById('userInput').addEventListener('focus', function() {
+            this.style.borderColor = '';
+            this.style.boxShadow = '';
+        });
+    </script>
+</body>
+</html>
